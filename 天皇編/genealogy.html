@@ -25,7 +25,7 @@
   <div class="hero">
     <p class="eyebrow">天皇編 系譜図</p>
     <h1>皇統の系譜図</h1>
-    <p class="lead">皇位は親から子へまっすぐ受け継がれただけではありません。皇統が分かれたり、遠い血筋から迎えられたりした4つの場面を、系譜図で見ていきます。</p>
+    <p class="lead">皇位は親から子へまっすぐ受け継がれただけではありません。皇統が分かれたり、遠い血筋から迎えられたりした4つの場面を系譜図で見たうえで、最後に歴代の全系譜をまとめます。</p>
   </div>
 
   <details class="toc" open>
@@ -82,6 +82,19 @@
     <h3>閑院宮家から光格天皇へ</h3>
     <p>閑院宮家は1710年、東山天皇の皇子・直仁親王を初代として創設されました。第118代 後桃園天皇には皇女が一人いるだけで皇子がなかったため、閑院宮典仁親王の王子（東山天皇の曾孫）が後桃園天皇の養子となり、1779年に第119代 光格天皇として即位しました。光格天皇の子孫が、現在の皇室につながっています。</p>
     <figure class="gfig" data-g="kaninn" data-title="④ 閑院宮家から光格天皇へ"></figure>
+  </section>
+
+  <section>
+    <h2 id="all">⑤ 歴代の全系譜</h2>
+    <p>第1代から第126代まで、北朝の5代も含めて、親子のつながりを時代ごとに示します。天皇どうしをつなぐために、即位しなかった皇族も点線の枠で入れています。</p>
+    <ul>
+      <li>女性天皇は父の下に置いています。母と子、夫婦の関係は線では示していません。</li>
+      <li>一度退位して再び即位した天皇（皇極・斉明、孝謙・称徳）は1つの枠にまとめています。</li>
+      <li>「前の章から」の枠は、前の時代の天皇です。</li>
+    </ul>
+    <div class="chips" id="tree-chips" aria-label="時代を選ぶ"></div>
+    <figure class="gfig" id="tree-fig"></figure>
+    <p class="wide-only"><button type="button" class="tool-btn" id="tree-all">全体図を開く（全時代を1枚で）</button></p>
   </section>
 
   <nav class="pager">
@@ -207,14 +220,17 @@
     var W = X(maxC) + BW + M, H = Y(maxR) + BH + M;
     var lines = [], labels = [];
     function path(d, cls) { lines.push('<path class="gl ' + (cls || "") + '" d="' + d + '"' + (cls === "adopt" ? ' marker-end="url(#arrow-' + key + ')"' : "") + "/>"); }
-    function text(x, y, s, cls, anchor) { labels.push('<text class="gtxt ' + (cls || "") + '" x="' + x + '" y="' + y + '"' + (anchor ? ' text-anchor="' + anchor + '"' : "") + ">" + s + "</text>"); }
+    function text(x, y, s, cls, anchor) {
+      if (anchor === "start") W = Math.max(W, x + s.length * 13 + M); // 文字がはみ出さないよう図の幅を広げる
+      labels.push('<text class="gtxt ' + (cls || "") + '" x="' + x + '" y="' + y + '"' + (anchor ? ' text-anchor="' + anchor + '"' : "") + ">" + s + "</text>");
+    }
     g.edges.forEach(function (e) {
       if (e[0] === "p") {
         var ps = e[1].map(function (k) { return N[k]; }), sx, sy;
         if (ps.length === 2) { sx = (ps[0].r + ps[1].x) / 2; sy = ps[0].cy; } else { sx = ps[0].cx; sy = ps[0].b; }
         e[2].forEach(function (k) {
           var c = N[k], my = c.y - (ROW - BH) / 2;
-          path("M" + sx + " " + sy + " V" + my + " H" + c.cx + " V" + c.y);
+          path("M" + sx + " " + sy + " V" + my + " H" + c.cx + " V" + c.y, e[3]);
         });
       } else if (e[0] === "s") {
         var a = N[e[1]], b = N[e[2]];
@@ -224,9 +240,12 @@
         if (e[4] === "side") {
           path("M" + f.r + " " + f.cy + " H" + t.cx + " V" + t.y, "dash");
           text(t.cx + 6, (f.cy + t.y) / 2 + 4, e[3], "", "start");
-        } else {
+        } else if (f.cx === t.cx) {
           path("M" + f.cx + " " + f.b + " V" + t.y, "dash");
           text(f.cx + 6, (f.b + t.y) / 2 + 4, e[3], "", "start");
+        } else {
+          path("M" + f.cx + " " + f.b + " V" + (t.y - (ROW - BH) / 2) + " H" + t.cx + " V" + t.y, "dash");
+          text(t.cx + 6, t.y - 5, e[3], "", "start");
         }
       } else if (e[0] === "a") {
         var s = N[e[1]], d = N[e[2]], left = d.cx < s.cx, end = left ? d.r + 4 : d.x - 4;
@@ -243,10 +262,10 @@
       var n = N[k], o = n.o, emp = o.n ? find(o) : null;
       var name = o.name || (emp ? emp.name : k);
       var sub = o.sub || (emp ? (emp.hokucho ? "北朝第" + emp.n + "代" : "第" + emp.n + "代") : "");
-      var cls = "gn" + (o.prince ? " prince" : "") + (o.grp ? " grp-" + o.grp : "");
+      var cls = "gn" + (o.prince ? " prince" : "") + (o.ghost ? " ghost" : "") + (o.grp ? " grp-" + o.grp : "");
       var style = emp ? ' style="--c: var(--era-' + emp.era + ')"' : "";
       var box = '<g class="' + cls + '"' + style + '><rect x="' + n.x + '" y="' + n.y + '" width="' + BW + '" height="' + BH + '" rx="8"/>' +
-        '<text class="gname" x="' + n.cx + '" y="' + (n.y + 22) + '" text-anchor="middle">' + name + "</text>" +
+        '<text class="gname" x="' + n.cx + '" y="' + (n.y + 22) + '" text-anchor="middle"' + (name.length >= 8 ? ' style="font-size: 13px"' : "") + ">" + name + "</text>" +
         (sub ? '<text class="gsub" x="' + n.cx + '" y="' + (n.y + 40) + '" text-anchor="middle">' + sub + "</text>" : "") + "</g>";
       return emp ? '<a href="era-' + emp.era + ".html#" + (emp.hokucho ? "h" : "e") + emp.n + '">' + box + "</a>" : box;
     });
@@ -255,8 +274,97 @@
     return { w: W, svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + W + " " + H + '" role="img">' + defs + lines.join("") + labels.join("") + boxes.join("") + "</svg>" };
   }
 
+  // ---- 全系譜：emperors.js の親子関係から配置を自動計算する ----
+  var PERSONS = window.PERSONS || [];
+  function K(e) { return (e.hokucho ? "h" : "e") + e.n; }
+  var ALL = {}, ORDER = {};
+  EMP.forEach(function (e, i) { if (!e.same) { ALL[K(e)] = { k: K(e), p: e.p, e: e, gap: e.gap }; ORDER[K(e)] = i; } });
+  EMP.forEach(function (e) { if (e.same) { var t = ALL[e.same].e; ALL[e.same].merged = { name: t.name.replace("天皇", "") + "・" + e.name.replace("天皇", ""), sub: "第" + t.n + "・" + e.n + "代" }; } });
+  PERSONS.forEach(function (p) { ALL[p.k] = { k: p.k, p: p.p, person: p }; });
+
+  function buildTree(era) {
+    // 表示する人：その章の天皇と、そこへつながる皇族。章の外の天皇は「ゴースト」（前の章）として上端に置く
+    var inc = {}, ghost = {};
+    function inEra(k) { var a = ALL[k]; return a.e && (!era || a.e.era === era); }
+    Object.keys(ALL).forEach(function (k) {
+      if (!inEra(k)) return;
+      inc[k] = 1;
+      var path = [], p = ALL[k].p;
+      while (p && !inEra(p)) {
+        if (ALL[p].e) { ghost[p] = 1; break; }
+        path.push(p); p = ALL[p].p;
+      }
+      path.forEach(function (x) { inc[x] = 1; });
+    });
+    // ゴースト同士が親子なら線でつながる（例：高倉→後鳥羽）
+    Object.keys(ghost).forEach(function (g) { inc[g] = 1; });
+    var kids = {}, roots = [];
+    Object.keys(inc).forEach(function (k) {
+      var p = ALL[k].p;
+      if (p && inc[p]) (kids[p] = kids[p] || []).push(k); else roots.push(k);
+    });
+    // 並び順：部分木の中で最も早い天皇の順
+    var first = {};
+    function f(k) {
+      if (first[k] != null) return first[k];
+      var m = ORDER[k] != null ? ORDER[k] : 1e9;
+      (kids[k] || []).forEach(function (c) { m = Math.min(m, f(c)); });
+      return (first[k] = m);
+    }
+    var byFirst = function (a, b) { return f(a) - f(b); };
+    Object.keys(kids).forEach(function (k) { kids[k].sort(byFirst); });
+    roots.sort(byFirst);
+    // 部分木を左から詰めて並べる（各段の左端・右端を比べて重ならない位置まで寄せる）
+    function lay(k) {
+      var ch = kids[k] || [];
+      if (!ch.length) return { nodes: [{ k: k, x: 0, d: 0 }], L: [0], R: [0] };
+      var acc = null, xs = [];
+      ch.forEach(function (c) {
+        var s = lay(c);
+        if (acc) {
+          var shift = -Infinity;
+          for (var i = 0; i < Math.min(acc.R.length, s.L.length); i++) shift = Math.max(shift, acc.R[i] - s.L[i] + 1);
+          s.nodes.forEach(function (n) { n.x += shift; });
+          s.L = s.L.map(function (v) { return v + shift; }); s.R = s.R.map(function (v) { return v + shift; });
+          var L = acc.L.concat(s.L.slice(acc.L.length)), R = [];
+          for (var j = 0; j < Math.max(acc.R.length, s.R.length); j++) R.push(j < s.R.length ? s.R[j] : acc.R[j]);
+          acc = { nodes: acc.nodes.concat(s.nodes), L: L, R: R };
+        } else acc = s;
+        xs.push(s.nodes[0].x);
+      });
+      var px = (xs[0] + xs[xs.length - 1]) / 2;
+      acc.nodes.forEach(function (n) { n.d += 1; });
+      return { nodes: [{ k: k, x: px, d: 0 }].concat(acc.nodes), L: [px].concat(acc.L), R: [px].concat(acc.R) };
+    }
+    var top = "_root"; kids[top] = roots;
+    var res = lay(top), minX = Infinity;
+    res.nodes.forEach(function (n) { if (n.k !== top) minX = Math.min(minX, n.x); });
+    var spec = { nodes: {}, edges: [] };
+    res.nodes.forEach(function (n) {
+      if (n.k === top) return;
+      var a = ALL[n.k], o;
+      if (a.person) {
+        var d = a.person.desc;
+        o = { prince: 1, name: a.person.name, sub: d.indexOf("・") > 0 ? d.split("・")[1] : d.replace(/（.*）/, "") };
+      } else {
+        o = { n: a.e.n, h: a.e.hokucho ? 1 : 0 };
+        if (a.merged) { o.name = a.merged.name; o.sub = a.merged.sub; }
+        if (ghost[n.k]) { o.ghost = 1; o.sub = "前の章から"; }
+      }
+      spec.nodes[n.k] = [n.x - minX, n.d - 1, o];
+    });
+    Object.keys(kids).forEach(function (p) {
+      if (p === top) return;
+      kids[p].forEach(function (c) {
+        if (ALL[c].gap) spec.edges.push(["d", p, c, ALL[c].gap]);
+        else spec.edges.push(["p", [p], [c]]);
+      });
+    });
+    return spec;
+  }
+
   // ---- ページへの配置と拡大表示 ----
-  document.querySelectorAll(".gfig").forEach(function (fig) {
+  function mount(fig) {
     var r = draw(fig.dataset.g), title = fig.dataset.title;
     var legend = (fig.dataset.legend || "").split("|").filter(Boolean).map(function (s) {
       var p = s.split(":"), color = p[0] === "grp-a" ? "var(--shu)" : "var(--ai)";
@@ -270,10 +378,36 @@
     svg.style.minWidth = Math.round(r.w * 0.62) + "px";
     svg.style.maxWidth = r.w + "px";
     fig.querySelector(".tool-btn").addEventListener("click", function () { openZoom(r, title); });
-  });
+  }
+  document.querySelectorAll(".gfig[data-g]").forEach(mount);
 
-  function openZoom(r, title) {
-    var scale = 1.2, box = document.createElement("div");
+  // 全系譜：時代ごとの図（A）と、広い画面向けの全体図（B）
+  var ERAS = window.ERAS || [], tfig = document.getElementById("tree-fig"), tchips = document.getElementById("tree-chips");
+  function showEra(i) {
+    G["tree" + i] = G["tree" + i] || buildTree(i);
+    tfig.dataset.g = "tree" + i;
+    tfig.dataset.title = "歴代の全系譜：" + ERAS[i];
+    mount(tfig);
+    tchips.querySelectorAll("button[data-era]").forEach(function (b) { b.setAttribute("aria-pressed", +b.dataset.era === i ? "true" : "false"); });
+  }
+  ERAS.forEach(function (name, i) {
+    if (!i) return;
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = name; b.dataset.era = i;
+    b.style.setProperty("--c", "var(--era-" + i + ")");
+    tchips.appendChild(b);
+  });
+  tchips.addEventListener("click", function (ev) {
+    var b = ev.target.closest("button[data-era]"); if (b) showEra(+b.dataset.era);
+  });
+  document.getElementById("tree-all").addEventListener("click", function () {
+    G.treeAll = G.treeAll || buildTree(0);
+    openZoom(draw("treeAll"), "歴代の全系譜（全体図）", 0.8);
+  });
+  showEra(1);
+
+  function openZoom(r, title, scale0) {
+    var scale = scale0 || 1.2, box = document.createElement("div");
     box.className = "gzoom";
     box.setAttribute("role", "dialog");
     box.setAttribute("aria-label", title + "（拡大）");
@@ -290,7 +424,7 @@
       var b = ev.target.closest("button"); if (!b) return;
       var z = +b.dataset.z;
       if (!z) return close();
-      scale = Math.min(2.5, Math.max(0.6, scale + z * 0.2));
+      scale = Math.min(2.5, Math.max(0.3, scale + z * (scale > 0.6 ? 0.2 : 0.1)));
       size();
     });
     document.addEventListener("keydown", onKey);

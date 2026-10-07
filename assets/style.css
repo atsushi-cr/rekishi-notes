@@ -330,6 +330,9 @@ th { font-family: var(--font-serif); background: var(--paper-2); }
 .gn.prince rect { stroke: var(--ink-soft); stroke-dasharray: 4 3; stroke-width: 1.2; }
 .gn .gname { font-family: var(--font-serif); font-weight: 700; font-size: 15px; fill: var(--ink); }
 .gn .gsub { font-size: 11px; fill: var(--ink-soft); }
+.gn.ghost rect { stroke-dasharray: 4 3; fill: var(--paper-2); }
+.wide-only { display: none; }
+@media (min-width: 768px) { .wide-only { display: block; } }
 .gn.grp-a rect { stroke: var(--shu); }
 .gn.grp-b rect { stroke: var(--ai); }
 .gn.grp-a .gname { fill: var(--shu); }
