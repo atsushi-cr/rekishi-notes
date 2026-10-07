@@ -45,6 +45,14 @@
       });
     }
 
+    // リンク先（#e26 など）が天皇の欄なら開いて表示する
+    var openHash = function () {
+      var t = location.hash && document.getElementById(location.hash.slice(1));
+      if (t && t.tagName === "DETAILS") { t.open = true; t.scrollIntoView(); }
+    };
+    openHash();
+    window.addEventListener("hashchange", openHash);
+
     // トップへ戻るボタン
     var top = document.createElement("button");
     top.className = "to-top";

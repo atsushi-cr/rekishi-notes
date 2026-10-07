@@ -315,6 +315,44 @@ th { font-family: var(--font-serif); background: var(--paper-2); }
 .quiz .next-q { margin-top: 12px; }
 [hidden] { display: none !important; }
 
+/* ---------- 系譜図（genealogy.html） ---------- */
+.gfig { margin: 1em 0 1.6em; }
+.gwrap {
+  overflow-x: auto; background: var(--paper-3); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 8px; -webkit-overflow-scrolling: touch;
+}
+.gwrap svg { display: block; height: auto; }
+.gbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-top: 6px; font-size: .8rem; color: var(--ink-soft); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.legend i { display: inline-block; width: 18px; height: 0; border-top: 3px solid var(--c); vertical-align: middle; margin-right: 4px; }
+.legend i.dash { border-top: 2px dashed var(--ink-soft); }
+.gn rect { fill: var(--paper); stroke: var(--c, var(--line)); stroke-width: 2; }
+.gn.prince rect { stroke: var(--ink-soft); stroke-dasharray: 4 3; stroke-width: 1.2; }
+.gn .gname { font-family: var(--font-serif); font-weight: 700; font-size: 15px; fill: var(--ink); }
+.gn .gsub { font-size: 11px; fill: var(--ink-soft); }
+.gn.grp-a rect { stroke: var(--shu); }
+.gn.grp-b rect { stroke: var(--ai); }
+.gn.grp-a .gname { fill: var(--shu); }
+.gn.grp-b .gname { fill: var(--ai); }
+a .gn:hover rect { fill: var(--paper-2); }
+.gl { fill: none; stroke: var(--ink-soft); stroke-width: 1.5; }
+.gl.dash { stroke-dasharray: 5 4; }
+.gl.adopt { stroke: var(--kin); stroke-width: 2; stroke-dasharray: 6 4; }
+.gtxt { font-size: 12px; fill: var(--ink-soft); }
+.gtxt.adopt { fill: var(--kin); font-weight: 700; }
+.gtxt.head { font-family: var(--font-serif); font-weight: 700; font-size: 15px; }
+.gtxt.head.grp-a { fill: var(--shu); }
+.gtxt.head.grp-b { fill: var(--ai); }
+.gzoom {
+  position: fixed; inset: 0; z-index: 100; background: var(--paper); overflow: auto; -webkit-overflow-scrolling: touch;
+}
+.gzoom .gzbar {
+  position: sticky; top: 0; left: 0; display: flex; gap: 8px; align-items: center; padding: 10px var(--gutter);
+  background: var(--paper-2); border-bottom: 1px solid var(--line); z-index: 1;
+}
+.gzoom .gzbar span { margin-right: auto; font-family: var(--font-serif); font-weight: 700; }
+.gzoom svg { display: block; margin: 16px; }
+
 /* ---------- PC（広い画面）：目次を左に固定 ---------- */
 @media (min-width: 1100px) {
   .site-header .wrap { max-width: 76rem; }
