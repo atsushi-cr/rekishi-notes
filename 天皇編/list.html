@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>歴代天皇の一覧と暗記</title>
+<meta name="description" content="天皇編：第1〜126代と北朝5代の一覧、名前を隠す暗記モード、順番クイズ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Shippori+Mincho:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/common.js"></script>
+<script src="data/emperors.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="site-logo" href="../index.html">歴史学</a>
+    <span class="breadcrumb"><a href="index.html">天皇編</a> › 一覧と暗記</span>
+    <button class="theme-toggle" type="button">☾</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <p class="eyebrow">天皇編 一覧と暗記</p>
+    <h1>歴代天皇を覚える</h1>
+    <p class="lead">第1代 神武天皇から第126代 今上天皇まで、北朝の5代も含めて一覧にしました。名前を隠して覚える「暗記」と、順番を確かめる「クイズ」も使えます。</p>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button type="button" role="tab" data-mode="list" aria-selected="true">一覧</button>
+    <button type="button" role="tab" data-mode="flash" aria-selected="false">暗記</button>
+    <button type="button" role="tab" data-mode="quiz" aria-selected="false">クイズ</button>
+  </div>
+
+  <div class="chips" id="era-chips" aria-label="時代で絞り込む"></div>
+
+  <div class="toolbar">
+    <span class="progress" id="progress"></span>
+    <button type="button" class="tool-btn" id="hide-learned" aria-pressed="false">覚えたものを隠す</button>
+  </div>
+
+  <noscript><p class="note">このページの一覧・暗記・クイズは JavaScript を有効にすると表示されます。</p></noscript>
+
+  <!-- 一覧 -->
+  <section id="mode-list"></section>
+
+  <!-- 暗記 -->
+  <section id="mode-flash" hidden>
+    <p class="section-lead">カードをタップすると名前が出ます。もう一度タップすると隠れます。</p>
+    <div class="toolbar">
+      <button type="button" class="tool-btn" id="flash-open">すべて表示</button>
+      <button type="button" class="tool-btn" id="flash-close">すべて隠す</button>
+    </div>
+    <div id="flash-body"></div>
+  </section>
+
+  <!-- クイズ -->
+  <section id="mode-quiz" hidden>
+    <p class="section-lead">上の時代ボタンで出題範囲を選べます。北朝は代数に数えないため、クイズには出ません。</p>
+    <div class="chips" id="quiz-type">
+      <button type="button" data-type="num" aria-pressed="true">第〇代は？</button>
+      <button type="button" data-type="next" aria-pressed="false">次の天皇は？</button>
+    </div>
+    <div class="quiz">
+      <p class="score" id="quiz-score"></p>
+      <p class="q" id="quiz-q"></p>
+      <div class="choices" id="quiz-choices"></div>
+      <p class="result" id="quiz-result" aria-live="polite"></p>
+      <button type="button" class="tool-btn next-q" id="quiz-next" hidden>次の問題 →</button>
+    </div>
+  </section>
+
+  <div class="note info">
+    <p class="note-title">覚えたチェックについて</p>
+    <p>「覚えた」の印はこのブラウザの中にだけ保存されます。別の端末やブラウザとは共有されません。</p>
+  </div>
+
+  <nav class="pager">
+    <a class="prev" href="era-6.html"><small>前のページ</small>← 近代・現代</a>
+    <a class="next" href="index.html"><small>天皇編のトップへ</small>天皇編 目次 →</a>
+  </nav>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">天皇編 ／ 出典・画像クレジットは「出典」ページにまとめる予定です。</div>
+</footer>
+
+<script>
+(function () {
+  var EMP = window.EMPERORS || [], ERAS = window.ERAS || [];
+  var KEY = "rekishi-tenno-learned";
+  var state = { mode: "list", era: 0, hideLearned: false, quizType: "num" };
+  var learned = {};
+  try { (JSON.parse(localStorage.getItem(KEY)) || []).forEach(function (id) { learned[id] = true; }); } catch (e) {}
+
+  function id(e) { return (e.hokucho ? "h" : "") + e.n; }
+  function label(e) { return e.hokucho ? "北朝" + e.n + "代" : "第" + e.n + "代"; }
+  function nameHtml(e) {
+    if (!e.yomi) return e.name;
+    var base = e.name.replace(/天皇$/, "");
+    return "<ruby>" + base + "<rt>" + e.yomi.replace(/てんのう$/, "") + "</rt></ruby>" + (base !== e.name ? "天皇" : "");
+  }
+  function saveLearned() {
+    try { localStorage.setItem(KEY, JSON.stringify(Object.keys(learned))); } catch (e) {}
+  }
+  function inEra(e) { return !state.era || e.era === state.era; }
+  function visible(e) { return inEra(e) && !(state.hideLearned && learned[id(e)]); }
+  function $(s) { return document.getElementById(s); }
+
+  // 時代の絞り込みボタン
+  var chips = $("era-chips");
+  ERAS.forEach(function (name, i) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.textContent = i ? name : "すべて";
+    b.dataset.era = i;
+    if (i) b.style.setProperty("--c", "var(--era-" + i + ")");
+    b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+    chips.appendChild(b);
+  });
+  chips.addEventListener("click", function (ev) {
+    var b = ev.target.closest("button"); if (!b) return;
+    state.era = +b.dataset.era;
+    chips.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    render();
+  });
+
+  // 一覧
+  function renderList() {
+    var html = "";
+    for (var era = 1; era <= 6; era++) {
+      if (state.era && state.era !== era) continue;
+      var items = EMP.filter(function (e) { return e.era === era && visible(e); });
+      html += '<h2 class="era-head" style="--c: var(--era-' + era + ')">' + ERAS[era] +
+        ' <a href="era-' + era + '.html">この章を読む →</a></h2>';
+      if (!items.length) { html += '<p class="section-lead">表示する天皇はありません（すべて覚えた印が付いています）。</p>'; continue; }
+      html += '<div class="cards">' + items.map(function (e) {
+        var k = id(e), on = learned[k];
+        return '<div class="ecard' + (on ? " learned" : "") + '" style="--c: var(--era-' + e.era + ')">' +
+          '<div class="num">' + (e.hokucho ? "北朝" : "第") + "<b>" + e.n + "</b>代</div>" +
+          '<div><div class="nm">' + nameHtml(e) + (e.tag ? "<small>" + e.tag + "</small>" : "") + "</div>" +
+          '<p class="desc">' + e.desc + "</p></div>" +
+          '<label class="learn-box"><input type="checkbox" data-id="' + k + '"' + (on ? " checked" : "") + ">覚えた</label></div>";
+      }).join("") + "</div>";
+    }
+    $("mode-list").innerHTML = html;
+  }
+  $("mode-list").addEventListener("change", function (ev) {
+    var k = ev.target.dataset.id; if (!k) return;
+    if (ev.target.checked) learned[k] = true; else delete learned[k];
+    saveLearned();
+    if (state.hideLearned) renderList();
+    else ev.target.closest(".ecard").classList.toggle("learned", ev.target.checked);
+    renderProgress();
+  });
+
+  // 暗記
+  function renderFlash() {
+    var html = "";
+    for (var era = 1; era <= 6; era++) {
+      if (state.era && state.era !== era) continue;
+      var items = EMP.filter(function (e) { return e.era === era && visible(e); });
+      if (!items.length) continue;
+      html += '<h2 class="era-head" style="--c: var(--era-' + era + ')">' + ERAS[era] + "</h2>";
+      html += '<div class="flash">' + items.map(function (e) {
+        return '<button type="button" class="' + (learned[id(e)] ? "learned" : "") + '" style="--c: var(--era-' + e.era + ')" aria-expanded="false">' +
+          '<span class="fnum">' + label(e) + '</span><span class="fname">' + nameHtml(e) + "</span></button>";
+      }).join("") + "</div>";
+    }
+    $("flash-body").innerHTML = html || '<p class="section-lead">表示する天皇はありません。</p>';
+  }
+  function setOpen(b, open) { b.classList.toggle("open", open); b.setAttribute("aria-expanded", open ? "true" : "false"); }
+  $("flash-body").addEventListener("click", function (ev) {
+    var b = ev.target.closest("button"); if (b) setOpen(b, !b.classList.contains("open"));
+  });
+  $("flash-open").addEventListener("click", function () { $("flash-body").querySelectorAll("button").forEach(function (b) { setOpen(b, true); }); });
+  $("flash-close").addEventListener("click", function () { $("flash-body").querySelectorAll("button").forEach(function (b) { setOpen(b, false); }); });
+
+  // クイズ（北朝を除く第1〜126代）
+  var MAIN = EMP.filter(function (e) { return !e.hokucho; }).sort(function (a, b) { return a.n - b.n; });
+  var score = { ok: 0, total: 0 }, current = null;
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function newQuestion() {
+    var pool = MAIN.filter(function (e) { return inEra(e) && (state.quizType === "num" || e.n < 126); });
+    var ask = pick(pool);
+    var answer = state.quizType === "num" ? ask : MAIN[ask.n]; // MAIN[n] は第n+1代
+    // 紛らわしいように、正解の近くの代から誤答を選ぶ
+    var near = MAIN.filter(function (e) { return e !== answer && e !== ask && Math.abs(e.n - answer.n) <= 6; });
+    var choices = shuffle(near).slice(0, 3).concat([answer]);
+    current = { answer: answer };
+    $("quiz-q").textContent = state.quizType === "num" ? "第" + ask.n + "代の天皇は？" : ask.name + "（第" + ask.n + "代）の次の天皇は？";
+    $("quiz-choices").innerHTML = shuffle(choices).map(function (e) {
+      return '<button type="button" data-n="' + e.n + '">' + e.name + "</button>";
+    }).join("");
+    $("quiz-result").textContent = ""; $("quiz-result").className = "result";
+    $("quiz-next").hidden = true;
+    renderScore();
+  }
+  function renderScore() { $("quiz-score").textContent = "正解 " + score.ok + " ／ " + score.total + " 問"; }
+  $("quiz-choices").addEventListener("click", function (ev) {
+    var b = ev.target.closest("button"); if (!b || !current || current.done) return;
+    current.done = true;
+    var ok = +b.dataset.n === current.answer.n;
+    score.total++; if (ok) score.ok++;
+    $("quiz-choices").querySelectorAll("button").forEach(function (x) {
+      if (+x.dataset.n === current.answer.n) x.classList.add("correct");
+      else if (x === b) x.classList.add("wrong");
+      x.disabled = true;
+    });
+    var r = $("quiz-result");
+    r.textContent = ok ? "正解！" : "残念。正解は 第" + current.answer.n + "代 " + current.answer.name + "。";
+    r.className = "result " + (ok ? "ok" : "ng");
+    $("quiz-next").hidden = false;
+    renderScore();
+  });
+  $("quiz-next").addEventListener("click", newQuestion);
+  $("quiz-type").addEventListener("click", function (ev) {
+    var b = ev.target.closest("button"); if (!b) return;
+    state.quizType = b.dataset.type;
+    $("quiz-type").querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    newQuestion();
+  });
+
+  // 共通
+  function renderProgress() {
+    var items = EMP.filter(inEra);
+    var n = items.filter(function (e) { return learned[id(e)]; }).length;
+    $("progress").textContent = "覚えた " + n + " ／ " + items.length + " 代";
+  }
+  function render() {
+    renderProgress();
+    if (state.mode === "list") renderList();
+    else if (state.mode === "flash") renderFlash();
+    else newQuestion();
+  }
+  document.querySelector(".tabs").addEventListener("click", function (ev) {
+    var b = ev.target.closest("button"); if (!b) return;
+    state.mode = b.dataset.mode;
+    document.querySelectorAll(".tabs button").forEach(function (x) { x.setAttribute("aria-selected", x === b ? "true" : "false"); });
+    ["list", "flash", "quiz"].forEach(function (m) { $("mode-" + m).hidden = m !== state.mode; });
+    $("hide-learned").hidden = state.mode === "quiz";
+    render();
+  });
+  $("hide-learned").addEventListener("click", function () {
+    state.hideLearned = !state.hideLearned;
+    this.setAttribute("aria-pressed", state.hideLearned ? "true" : "false");
+    this.textContent = state.hideLearned ? "覚えたものも表示" : "覚えたものを隠す";
+    render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

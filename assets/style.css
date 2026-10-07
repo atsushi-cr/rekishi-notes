@@ -258,6 +258,63 @@ th { font-family: var(--font-serif); background: var(--paper-2); }
 .volumes.compact .volume { padding: 14px 16px; }
 .volumes.compact .volume h2 { font-size: 1.1rem; }
 
+/* ---------- 一覧と暗記（list.html） ---------- */
+.tabs { display: flex; gap: 6px; border-bottom: 2px solid var(--line); margin: 8px 0 16px; }
+.tabs button {
+  flex: 1; font: inherit; font-size: 1rem; padding: 10px 4px; cursor: pointer;
+  background: none; border: none; border-bottom: 3px solid transparent; margin-bottom: -2px; color: var(--ink-soft);
+}
+.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--shu); font-weight: 700; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+.chips button, .tool-btn {
+  font: inherit; font-size: .85rem; padding: 6px 12px; min-height: 36px; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 999px; background: var(--paper-3); color: var(--ink);
+}
+.chips button[aria-pressed="true"] { background: var(--c, var(--ink)); border-color: var(--c, var(--ink)); color: var(--paper-3); }
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 14px; font-size: .9rem; color: var(--ink-soft); }
+.toolbar .progress { margin-right: auto; }
+.era-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; border-left: 5px solid var(--c); padding-left: 10px; }
+.era-head a { font-size: .85rem; font-family: var(--font-sans); font-weight: 400; }
+.cards { display: grid; gap: 8px; margin: 0 0 28px; }
+.ecard {
+  display: grid; grid-template-columns: 3.4em 1fr auto; gap: 10px; align-items: start;
+  background: var(--paper-3); border: 1px solid var(--line); border-left: 5px solid var(--c); border-radius: var(--radius);
+  padding: 10px 12px;
+}
+.ecard .num { font-size: .75rem; color: var(--ink-soft); text-align: center; line-height: 1.2; }
+.ecard .num b { display: block; font-size: 1.3rem; color: var(--c); font-family: var(--font-serif); }
+.ecard .nm { font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem; }
+.ecard .nm small { font-family: var(--font-sans); font-weight: 400; font-size: .75rem; color: var(--kin); margin-left: 6px; }
+.ecard .desc { margin: 2px 0 0; font-size: .9rem; color: var(--ink-soft); }
+.ecard.learned { opacity: .6; }
+.learn-box { display: flex; flex-direction: column; align-items: center; font-size: .7rem; color: var(--ink-soft); cursor: pointer; }
+.learn-box input { width: 22px; height: 22px; accent-color: var(--shu); cursor: pointer; }
+.flash { display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: 8px; margin-bottom: 28px; }
+.flash button {
+  font: inherit; text-align: left; cursor: pointer; min-height: 64px; padding: 8px 10px; color: var(--ink);
+  background: var(--paper-3); border: 1px solid var(--line); border-left: 5px solid var(--c); border-radius: var(--radius);
+}
+.flash .fnum { display: block; font-size: .8rem; color: var(--ink-soft); }
+.flash .fname { display: block; font-family: var(--font-serif); font-weight: 700; font-size: 1.05rem; }
+.flash button:not(.open) .fname { color: transparent; background: var(--paper-2); border-radius: 4px; }
+.flash button:not(.open) .fname rt { color: transparent; }
+.flash button.learned { opacity: .55; }
+.quiz { background: var(--paper-3); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.quiz .q { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; margin: 0 0 12px; }
+.quiz .choices { display: grid; gap: 8px; }
+.quiz .choices button {
+  font: inherit; font-size: 1.05rem; text-align: left; padding: 12px 14px; cursor: pointer; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+}
+.quiz .choices button.correct { border: 2px solid var(--era-2); background: var(--paper-2); }
+.quiz .choices button.wrong { border: 2px solid var(--shu); text-decoration: line-through; }
+.quiz .result { min-height: 1.6em; margin: 12px 0 0; font-weight: 700; }
+.quiz .result.ok { color: var(--era-2); }
+.quiz .result.ng { color: var(--shu); }
+.quiz .score { font-size: .85rem; color: var(--ink-soft); margin: 0 0 8px; }
+.quiz .next-q { margin-top: 12px; }
+[hidden] { display: none !important; }
+
 /* ---------- PC（広い画面）：目次を左に固定 ---------- */
 @media (min-width: 1100px) {
   .site-header .wrap { max-width: 76rem; }
