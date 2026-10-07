@@ -61,5 +61,113 @@
   "desc": "Statue of Emperor Keitai at Mt.Asuwa in Fukui, Fukui.",
   "w": 240,
   "h": 320
+ },
+ "e29": {
+  "file": "Emperor Kinmei.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Kinmei.jpg",
+  "license": "Public domain",
+  "artist": "三宅幸太郎 (Kōtarō Miyake)",
+  "desc": "Emperor Kinmei, who was the 29th emperor of Japan",
+  "w": 240,
+  "h": 290
+ },
+ "e32": {
+  "file": "Emperor Sushun.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Sushun.jpg",
+  "license": "Public domain",
+  "artist": "明治天皇聖徳奉讃会",
+  "desc": "崇峻天皇（『皇国紀元二千六百年史』）",
+  "w": 240,
+  "h": 360
+ },
+ "e33": {
+  "file": "Empress Suiko 2.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Empress_Suiko_2.jpg",
+  "license": "Public domain",
+  "artist": "Tosa Mitsuyoshi",
+  "desc": "",
+  "w": 240,
+  "h": 240
+ },
+ "e35": {
+  "file": "Empress Kogyoku-Saimei.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Empress_Kogyoku-Saimei.jpg",
+  "license": "Public domain",
+  "artist": "Published by 三英舎 (San'ei-sha)",
+  "desc": "Empress Kōgyoku (Saimei) (594–661, reigned 642–45 and 655–61)",
+  "w": 240,
+  "h": 305
+ },
+ "e36": {
+  "file": "Emperor Kotoku.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Kotoku.jpg",
+  "license": "Public domain",
+  "artist": "明治天皇聖徳奉讃会",
+  "desc": "孝徳天皇（『皇国紀元二千六百年史』）",
+  "w": 240,
+  "h": 360
+ },
+ "e38": {
+  "file": "Emperor Tenji (Kanou Tanyuu).jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Tenji_(Kanou_Tanyuu).jpg",
+  "license": "Public domain",
+  "artist": "Kanō Tan'yū",
+  "desc": "天智天皇（狩野探幽「百人一首画帖」個人蔵）",
+  "w": 240,
+  "h": 300
+ },
+ "e40": {
+  "file": "天武天皇御影、金剛山寺所蔵.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:%E5%A4%A9%E6%AD%A6%E5%A4%A9%E7%9A%87%E5%BE%A1%E5%BD%B1%E3%80%81%E9%87%91%E5%89%9B%E5%B1%B1%E5%AF%BA%E6%89%80%E8%94%B5.jpg",
+  "license": "CC0",
+  "artist": "Xwdgtpwga",
+  "desc": "天武天皇御影（矢田寺所蔵）",
+  "w": 240,
+  "h": 334
+ },
+ "e41": {
+  "file": "Empress Jitou (Kanou Tanyuu).jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Empress_Jitou_(Kanou_Tanyuu).jpg",
+  "license": "Public domain",
+  "artist": "Kanō Tan'yū",
+  "desc": "持統天皇（狩野探幽「百人一首画帖」個人蔵）",
+  "w": 240,
+  "h": 300
+ },
+ "e43": {
+  "file": "Empress Gemmei.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Empress_Gemmei.jpg",
+  "license": "Public domain",
+  "artist": "Published by 三英舎 (San'ei-sha)",
+  "desc": "Empress Genmei, who was the 43rd monarch of Japan",
+  "w": 240,
+  "h": 326
+ },
+ "e45": {
+  "file": "Emperor Shomu.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Shomu.jpg",
+  "license": "Public domain",
+  "artist": "Unknown authorUnknown author",
+  "desc": "Portrait of Emperor Shōmu, Japan, Kamakura period, 13th century, Imperial collection",
+  "w": 215,
+  "h": 360
+ },
+ "e48": {
+  "file": "Empress Shōtoku.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Empress_Sh%C5%8Dtoku.jpg",
+  "license": "Public domain",
+  "artist": "Sumiyoshi Hiroyasu",
+  "desc": "",
+  "w": 240,
+  "h": 240
+ },
+ "e49": {
+  "file": "Emperor Konin.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Konin.jpg",
+  "license": "Public domain",
+  "artist": "明治天皇聖徳奉讃会",
+  "desc": "光仁天皇（『皇国紀元二千六百年史』）",
+  "w": 240,
+  "h": 360
  }
 }

@@ -22,7 +22,7 @@ for key,title in pairs:
     wide=im.width>im.height*1.15
     tw=480 if wide else 240
     if im.width>tw: im=im.resize((tw,round(im.height*tw/im.width)),Image.LANCZOS)
-    if not wide and im.height>360: im=im.crop((0,0,im.width,360))
+    if not wide and im.height>360: im=im.resize((round(im.width*360/im.height),360),Image.LANCZOS)  # 縦長は切らずに縮小
     f=out/f"{key}.webp"; im.save(f,"WEBP",quality=72,method=6)
     meta[key]=dict(file=title,url=ii["descriptionurl"],license=cl("LicenseShortName"),artist=cl("Artist")[:120],desc=cl("ImageDescription")[:160],w=im.width,h=im.height)
     print(key,f.stat().st_size//1024,"KB",im.size,meta[key]["license"],"|",meta[key]["artist"][:50],"|",meta[key]["desc"][:80])
