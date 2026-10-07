@@ -169,5 +169,140 @@
   "desc": "光仁天皇（『皇国紀元二千六百年史』）",
   "w": 240,
   "h": 360
+ },
+ "e50": {
+  "file": "Emperor Kammu large.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Kammu_large.jpg",
+  "license": "Public domain",
+  "artist": "Unknown",
+  "desc": "",
+  "w": 240,
+  "h": 360
+ },
+ "e52": {
+  "file": "Emperor Saga large.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Saga_large.jpg",
+  "license": "Public domain",
+  "artist": "Unknown",
+  "desc": "",
+  "w": 240,
+  "h": 344
+ },
+ "e56": {
+  "file": "Emperor Seiwa.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Seiwa.jpg",
+  "license": "Public domain",
+  "artist": "Ryōkyō",
+  "desc": "",
+  "w": 240,
+  "h": 308
+ },
+ "e58": {
+  "file": "Tennō Kōkō.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Tenn%C5%8D_K%C5%8Dk%C5%8D.jpg",
+  "license": "Public domain",
+  "artist": "Shunsho Katsukawa (1726-1792)",
+  "desc": "Emperor Kōkō - \"Hyaku-nin Isshu\" (One Hundred Poems by one Hundred Poets), by Shunsho Katsukawa (1726-1792). Woodblock print depicting Emperor Kōkō. Poem: \"I wa",
+  "w": 240,
+  "h": 356
+ },
+ "e59": {
+  "file": "Emperor Uda crop.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Uda_crop.jpg",
+  "license": "Public domain",
+  "artist": "Emperor_Uda_large.jpg: unknown\nderivative work: bamse (talk)",
+  "desc": "Portrait of the ex-Emperor Uda",
+  "w": 240,
+  "h": 325
+ },
+ "e60": {
+  "file": "Emperor Daigo.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Daigo.jpg",
+  "license": "Public domain",
+  "artist": "Unknown artistUnknown artist",
+  "desc": "",
+  "w": 180,
+  "h": 360
+ },
+ "e62": {
+  "file": "Emperor Murakami cropped.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Murakami_cropped.jpg",
+  "license": "Public domain",
+  "artist": "Unknown authorUnknown author",
+  "desc": "Portrait of the Emperor Murakami(detail)",
+  "w": 240,
+  "h": 273
+ },
+ "e66": {
+  "file": "Emperor Ichijō.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Ichij%C5%8D.jpg",
+  "license": "Public domain",
+  "artist": "Unknown",
+  "desc": "",
+  "w": 240,
+  "h": 277
+ },
+ "e68": {
+  "file": "Empress Shoshi and son (cropped to Shoshi and son).jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Empress_Shoshi_and_son_(cropped_to_Shoshi_and_son).jpg",
+  "license": "Public domain",
+  "artist": "Unknown authorUnknown author",
+  "desc": "detached segment from Murasaki Shikibu Nikki Emaki (illustrated diary of Lady Murasaki).",
+  "w": 240,
+  "h": 215
+ },
+ "e71": {
+  "file": "Emperor Gosanjō.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Gosanj%C5%8D.jpg",
+  "license": "Public domain",
+  "artist": "Published by 三英舎 (San'ei-sha)",
+  "desc": "Emperor Go-Sanjō, who was the 71st emperor of Japan",
+  "w": 240,
+  "h": 300
+ },
+ "e72": {
+  "file": "Emperor Shirakawa.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Shirakawa.jpg",
+  "license": "Public domain",
+  "artist": "Unknown authorUnknown author",
+  "desc": "Portrait of the Emperor Shirakawa",
+  "w": 240,
+  "h": 221
+ },
+ "e75": {
+  "file": "Emperor Sutoku.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Sutoku.jpg",
+  "license": "Public domain",
+  "artist": "",
+  "desc": "崇徳上皇像　京都 白峰神宮所蔵",
+  "w": 240,
+  "h": 334
+ },
+ "e77": {
+  "file": "Emperor Go-Shirakawa2.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Go-Shirakawa2.jpg",
+  "license": "Public domain",
+  "artist": "Fujiwara no Tamenobu",
+  "desc": "",
+  "w": 240,
+  "h": 262
+ },
+ "e81": {
+  "file": "Emperor Antoku.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Antoku.jpg",
+  "license": "Public domain",
+  "artist": "Unknown",
+  "desc": "",
+  "w": 240,
+  "h": 190
+ },
+ "e82": {
+  "file": "Emperor Go-Toba.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Go-Toba.jpg",
+  "license": "Public domain",
+  "artist": "Fujiwara no Nobuzane",
+  "desc": "",
+  "w": 240,
+  "h": 244
  }
 }

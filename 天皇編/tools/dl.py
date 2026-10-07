@@ -19,7 +19,7 @@ for key,title in pairs:
     ii=pg["imageinfo"][0]; m=ii["extmetadata"]; cl=lambda k: re.sub(r"<[^>]+>","",m.get(k,{}).get("value","")).strip()
     data=urllib.request.urlopen(urllib.request.Request(ii["thumburl"],headers=UA),timeout=60).read(); time.sleep(2)
     im=Image.open(io.BytesIO(data)).convert("RGB")
-    wide=im.width>im.height*1.15
+    wide=im.width>im.height*1.4
     tw=480 if wide else 240
     if im.width>tw: im=im.resize((tw,round(im.height*tw/im.width)),Image.LANCZOS)
     if not wide and im.height>360: im=im.resize((round(im.width*360/im.height),360),Image.LANCZOS)  # 縦長は切らずに縮小
