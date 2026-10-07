@@ -1,0 +1,258 @@
+/* =========================================================
+   歴史学 共通スタイル
+   すべての「〇〇編」はこのファイルを読み込む。
+   色・フォント・余白は :root の変数だけを変更すること。
+   ========================================================= */
+
+:root {
+  /* 色（和色） */
+  --paper: #f6f1e7;      /* 生成り：背景 */
+  --paper-2: #ede5d3;    /* 一段濃い生成り：カード・帯 */
+  --paper-3: #fffdf8;    /* 明るい面 */
+  --ink: #2b2722;        /* 墨：本文 */
+  --ink-soft: #5e564b;   /* 薄墨：補足 */
+  --line: #d8ccb4;       /* 罫線 */
+  --shu: #b5442a;        /* 朱：強調・見出しの印 */
+  --ai: #2d4a6a;         /* 藍：リンク・図 */
+  --kin: #9a7a2e;        /* 金茶：バッジ */
+  --warn-bg: #f7e6d9;    /* 「諸説あり」等の注記背景 */
+
+  /* 時代色（年表・一覧で共通使用） */
+  --era-1: #8a6a3d;  /* 上古・古墳 */
+  --era-2: #4f7a5a;  /* 飛鳥・奈良 */
+  --era-3: #9b4a6a;  /* 平安 */
+  --era-4: #5a5f8f;  /* 鎌倉〜室町 */
+  --era-5: #a5642c;  /* 安土桃山・江戸 */
+  --era-6: #2d4a6a;  /* 近代・現代 */
+
+  /* 文字 */
+  --font-serif: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-sans: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+
+  /* 寸法 */
+  --measure: 44rem;   /* 本文の最大幅 */
+  --gutter: 16px;     /* スマホの左右余白 */
+  --radius: 10px;
+}
+
+/* ダークモード（端末設定に追従。手動切替は data-theme で上書き） */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1b1916; --paper-2: #26221d; --paper-3: #2e2a24;
+    --ink: #ece4d4; --ink-soft: #b3a995; --line: #423b32;
+    --shu: #e27c5c; --ai: #92b3d8; --kin: #d2b26a; --warn-bg: #3a2a22;
+    --era-1: #c09a66; --era-2: #86b592; --era-3: #d48aa8;
+    --era-4: #9da2d6; --era-5: #dca06a; --era-6: #92b3d8;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #1b1916; --paper-2: #26221d; --paper-3: #2e2a24;
+  --ink: #ece4d4; --ink-soft: #b3a995; --line: #423b32;
+  --shu: #e27c5c; --ai: #92b3d8; --kin: #d2b26a; --warn-bg: #3a2a22;
+  --era-1: #c09a66; --era-2: #86b592; --era-3: #d48aa8;
+  --era-4: #9da2d6; --era-5: #dca06a; --era-6: #92b3d8;
+}
+
+/* ---------- 基本 ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.9;
+  letter-spacing: .02em;
+  overflow-wrap: anywhere;
+}
+img, svg { max-width: 100%; height: auto; }
+a { color: var(--ai); text-underline-offset: 3px; }
+a:hover { color: var(--shu); }
+h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 700; line-height: 1.5; }
+ruby rt { font-size: .55em; color: var(--ink-soft); }
+:focus-visible { outline: 2px solid var(--shu); outline-offset: 2px; }
+
+.wrap { max-width: var(--measure); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* ---------- ヘッダー ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+}
+.site-header .wrap { display: flex; align-items: center; gap: 12px; min-height: 52px; }
+.site-logo {
+  font-family: var(--font-serif); font-weight: 800; font-size: 1.1rem;
+  color: var(--ink); text-decoration: none; letter-spacing: .15em;
+}
+.site-logo::before { content: "◆"; color: var(--shu); margin-right: .35em; font-size: .8em; }
+.breadcrumb { font-size: .8rem; color: var(--ink-soft); flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.breadcrumb a { color: inherit; }
+.theme-toggle {
+  border: 1px solid var(--line); background: var(--paper-3); color: var(--ink);
+  border-radius: 999px; width: 40px; height: 40px; font-size: 1rem; cursor: pointer;
+}
+
+/* ---------- ページ冒頭 ---------- */
+.hero { padding: 40px 0 24px; border-bottom: 1px solid var(--line); }
+.hero .eyebrow { font-size: .8rem; letter-spacing: .3em; color: var(--shu); margin: 0; }
+.hero h1 { font-size: clamp(1.7rem, 6vw, 2.4rem); margin: .2em 0 .3em; }
+.hero .lead { color: var(--ink-soft); margin: 0; }
+
+/* ---------- 目次 ---------- */
+.toc {
+  margin: 24px 0; background: var(--paper-2); border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+.toc summary { padding: 12px 16px; cursor: pointer; font-family: var(--font-serif); font-weight: 700; }
+.toc ol { margin: 0; padding: 0 16px 14px 2.2em; }
+.toc li { padding: 4px 0; }
+.toc a { text-decoration: none; color: var(--ink); }
+.toc a:hover { color: var(--shu); }
+
+/* ---------- 本文 ---------- */
+main section { padding: 28px 0 8px; }
+main h2 {
+  font-size: 1.45rem; margin: 0 0 .8em; padding-left: .7em;
+  border-left: 4px solid var(--shu);
+}
+main h3 { font-size: 1.15rem; margin: 1.6em 0 .5em; }
+main p { margin: 0 0 1.1em; }
+strong { color: var(--shu); font-weight: 700; }
+
+/* 注記（諸説あり・検証メモ） */
+.note {
+  background: var(--warn-bg); border-left: 4px solid var(--shu);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 16px; margin: 1em 0 1.4em; font-size: .92rem;
+}
+.note .note-title { font-weight: 700; color: var(--shu); display: block; margin-bottom: .2em; }
+.note.info { background: var(--paper-2); border-left-color: var(--ai); }
+.note.info .note-title { color: var(--ai); }
+
+/* ポイント（覚えどころ） */
+.point {
+  border: 1px solid var(--line); background: var(--paper-3);
+  border-radius: var(--radius); padding: 16px; margin: 1.2em 0;
+}
+.point h3 { margin: 0 0 .5em; font-size: 1.05rem; }
+.point h3::before { content: "要 "; color: var(--shu); }
+
+/* 図版 */
+figure { margin: 1.4em 0; }
+figure img { display: block; border-radius: var(--radius); border: 1px solid var(--line); }
+figcaption { font-size: .8rem; color: var(--ink-soft); margin-top: .4em; line-height: 1.6; }
+.img-placeholder {
+  aspect-ratio: 16 / 9; display: grid; place-items: center; text-align: center;
+  border: 1px dashed var(--line); border-radius: var(--radius); color: var(--ink-soft);
+  background: repeating-linear-gradient(45deg, var(--paper-2) 0 10px, var(--paper) 10px 20px);
+  font-size: .85rem; padding: 12px;
+}
+
+/* 流れ図（縦の系譜） */
+.flow { list-style: none; margin: 1em 0; padding: 0; }
+.flow > li {
+  position: relative; padding: 10px 14px 10px 18px; margin: 0 0 10px;
+  background: var(--paper-3); border: 1px solid var(--line); border-radius: var(--radius);
+}
+.flow > li::before {
+  content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 4px;
+  border-radius: 2px; background: var(--c, var(--ai));
+}
+.flow > li:not(:last-child)::after {
+  content: "▼"; position: absolute; left: 50%; bottom: -15px; transform: translateX(-50%);
+  font-size: .6rem; color: var(--ink-soft);
+}
+.flow .flow-title { font-family: var(--font-serif); font-weight: 700; display: block; }
+.flow .flow-body { font-size: .9rem; color: var(--ink-soft); }
+
+/* 天皇カード（タップで開く） */
+.emperors { display: grid; gap: 10px; margin: 1em 0; }
+.emp {
+  background: var(--paper-3); border: 1px solid var(--line);
+  border-left: 5px solid var(--c, var(--era-1)); border-radius: var(--radius);
+}
+.emp summary {
+  list-style: none; cursor: pointer; padding: 12px 14px;
+  display: grid; grid-template-columns: 3.6em 1fr auto; align-items: center; gap: 10px;
+}
+.emp summary::-webkit-details-marker { display: none; }
+.emp .num { font-family: var(--font-serif); font-size: .85rem; color: var(--ink-soft); text-align: center; line-height: 1.3; }
+.emp .num b { display: block; font-size: 1.35rem; color: var(--c, var(--era-1)); }
+.emp .name { font-family: var(--font-serif); font-weight: 700; font-size: 1.12rem; line-height: 1.4; }
+.emp .name small { display: block; font-family: var(--font-sans); font-weight: 400; font-size: .75rem; color: var(--ink-soft); }
+.emp summary::after { content: "＋"; color: var(--ink-soft); }
+.emp[open] summary::after { content: "－"; }
+.emp .body { padding: 0 14px 14px; border-top: 1px dashed var(--line); font-size: .95rem; }
+.emp .body p { margin: .8em 0 0; }
+.emp.major .name::after { content: "重要"; font-family: var(--font-sans); font-size: .65rem; font-weight: 700; color: #fff; background: var(--shu); border-radius: 4px; padding: 1px 6px; margin-left: 8px; vertical-align: middle; }
+
+.badge {
+  display: inline-block; font-size: .72rem; line-height: 1.6; padding: 0 8px; margin: 0 4px 4px 0;
+  border: 1px solid var(--kin); color: var(--kin); border-radius: 999px;
+}
+
+/* 暗唱（覚え歌） */
+.chant { display: flex; flex-wrap: wrap; gap: 6px; margin: .6em 0 0; padding: 0; list-style: none; }
+.chant li {
+  font-family: var(--font-serif); background: var(--paper-2); border-radius: 6px;
+  padding: 2px 8px; font-size: .95rem;
+}
+.chant li span { font-size: .7rem; color: var(--ink-soft); margin-right: 3px; }
+
+/* 表（タブレット以上で使う。スマホではカードを優先） */
+.table-wrap { overflow-x: auto; margin: 1em 0; }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+th, td { border-bottom: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+th { font-family: var(--font-serif); background: var(--paper-2); }
+
+/* 編の一覧カード（トップページ） */
+.volumes { display: grid; gap: 14px; margin: 24px 0; }
+.volume {
+  display: block; text-decoration: none; color: var(--ink);
+  background: var(--paper-3); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 18px; position: relative; overflow: hidden;
+}
+.volume::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 6px; background: var(--shu); }
+.volume h2 { margin: 0 0 .2em; font-size: 1.3rem; border: 0; padding: 0; }
+.volume p { margin: 0; color: var(--ink-soft); font-size: .92rem; }
+.volume.soon { opacity: .55; pointer-events: none; }
+.volume.soon::before { background: var(--line); }
+.volume .tag { position: absolute; top: 14px; right: 14px; font-size: .72rem; color: var(--ink-soft); }
+
+/* 前後ページ */
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 36px 0; }
+.pager a {
+  display: block; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--radius);
+  text-decoration: none; color: var(--ink); background: var(--paper-3); font-size: .9rem;
+}
+.pager a small { display: block; color: var(--ink-soft); font-size: .72rem; }
+.pager .next { text-align: right; grid-column: 2; }
+
+/* フッター */
+.site-footer {
+  border-top: 1px solid var(--line); margin-top: 40px; padding: 20px 0 40px;
+  font-size: .8rem; color: var(--ink-soft);
+}
+
+.to-top {
+  position: fixed; right: 16px; bottom: 16px; width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid var(--line); background: var(--paper-3); color: var(--ink);
+  font-size: 1rem; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity .2s;
+}
+.to-top.show { opacity: .9; pointer-events: auto; }
+
+/* ---------- タブレット以上 ---------- */
+@media (min-width: 720px) {
+  body { font-size: 17.5px; }
+  .hero { padding: 64px 0 32px; }
+  .volumes { grid-template-columns: 1fr 1fr; }
+  .emperors { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+@media print {
+  .site-header, .theme-toggle, .to-top, .pager { display: none; }
+  .emp .body { display: block; }
+}
