@@ -144,6 +144,12 @@ strong { color: var(--shu); font-weight: 700; }
 figure { margin: 1.4em 0; }
 figure img { display: block; border-radius: var(--radius); border: 1px solid var(--line); }
 figcaption { font-size: .8rem; color: var(--ink-soft); margin-top: .4em; line-height: 1.6; }
+/* 天皇の欄の肖像（縦長は右に回り込み、横長は本文幅） */
+.emp .body::after { content: ""; display: block; clear: both; }
+.emp .pf { float: right; width: 110px; margin: .9em 0 .4em 12px; }
+.emp .pf.wide { float: none; width: 100%; max-width: 360px; margin: .9em 0 0; }
+.emp .pf img { width: 100%; height: auto; }
+.emp .pf figcaption { font-size: .7rem; line-height: 1.5; }
 .img-placeholder {
   aspect-ratio: 16 / 9; display: grid; place-items: center; text-align: center;
   border: 1px dashed var(--line); border-radius: var(--radius); color: var(--ink-soft);

@@ -1,0 +1,65 @@
+{
+ "e1": {
+  "file": "Emperor Jimmu.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Jimmu.jpg",
+  "license": "Public domain",
+  "artist": "Tsukioka Yoshitoshi (月岡芳年): 1839-1892",
+  "desc": "Depiction of the bearded legendary Emperor Jimmu (Jinmu tennô) with his bow and the golden kite. Medium: Woodblock print (nishiki-e). Dimensions: Vertical ôban;",
+  "w": 240,
+  "h": 349
+ },
+ "e10": {
+  "file": "Andon-yama Kofun, haisho.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Andon-yama_Kofun,_haisho.jpg",
+  "license": "CC0",
+  "artist": "Saigen Jiro",
+  "desc": "崇神天皇山辺道勾岡上陵 拝所",
+  "w": 480,
+  "h": 316
+ },
+ "e12": {
+  "file": "Emperor Keikō.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Keik%C5%8D.jpg",
+  "license": "Public domain",
+  "artist": "Published by 三英舎 (San'ei-sha)",
+  "desc": "Emperor Keikō, who was the 12th emperor of Japan",
+  "w": 240,
+  "h": 264
+ },
+ "e15": {
+  "file": "Emperor Ōjin2.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_%C5%8Cjin2.jpg",
+  "license": "Public domain",
+  "artist": "住吉具慶 (Sumiyoshi Gukei, 1631-1705)",
+  "desc": "Painting depicting Emperor Ojin and his attendant Takenouchi no Shukune",
+  "w": 240,
+  "h": 360
+ },
+ "e16": {
+  "file": "Azuma nishiki chuya kurabe, Nintoku tenno (detail 2).jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Azuma_nishiki_chuya_kurabe,_Nintoku_tenno_(detail_2).jpg",
+  "license": "Public domain",
+  "artist": "Toyohara Chikanobu",
+  "desc": "Eastern brocades; Azuma nishiki chuya kurabe: Nintoku tenno",
+  "w": 240,
+  "h": 335
+ },
+ "e21": {
+  "file": "Tennō Yūryaku detail.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Tenn%C5%8D_Y%C5%ABryaku_detail.jpg",
+  "license": "Public domain",
+  "artist": "Ginko Adachi (active 1874-1897)",
+  "desc": "Detail from Emperor and Boar, by Ginko Adachi. Woodblock print depicting a hunting scene, where Emperor Yūryaku (later half 5th century) overpowers a large wild",
+  "w": 240,
+  "h": 296
+ },
+ "e26": {
+  "file": "Statue of Emperor Keitai.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Statue_of_Emperor_Keitai.jpg",
+  "license": "CC BY-SA 3.0",
+  "artist": "立花左近",
+  "desc": "Statue of Emperor Keitai at Mt.Asuwa in Fukui, Fukui.",
+  "w": 240,
+  "h": 320
+ }
+}
