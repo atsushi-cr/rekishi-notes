@@ -376,5 +376,86 @@
   "desc": "",
   "w": 240,
   "h": 350
+ },
+ "e106": {
+  "file": "Emperor Ogimachi.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Ogimachi.jpg",
+  "license": "Public domain",
+  "artist": "Unknown (不明)",
+  "desc": "",
+  "w": 240,
+  "h": 327
+ },
+ "e108": {
+  "file": "Emperor Go-Mizunoo3.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Go-Mizunoo3.jpg",
+  "license": "Public domain",
+  "artist": "Ogata Kōrin",
+  "desc": "",
+  "w": 240,
+  "h": 267
+ },
+ "e109": {
+  "file": "Meisho of Japan.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Meisho_of_Japan.jpg",
+  "license": "Public domain",
+  "artist": "",
+  "desc": "Empress Meishō, who was the 109th Imperial ruler of Japan",
+  "w": 240,
+  "h": 313
+ },
+ "e112": {
+  "file": "Emperor Reigen.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Reigen.jpg",
+  "license": "Public domain",
+  "artist": "Imperial Princess Masako",
+  "desc": "",
+  "w": 240,
+  "h": 232
+ },
+ "e113": {
+  "file": "Emperor Higashiyama.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Higashiyama.jpg",
+  "license": "Public domain",
+  "artist": "Prince Kōkan",
+  "desc": "",
+  "w": 240,
+  "h": 258
+ },
+ "e115": {
+  "file": "Emperor Sakuramachi.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Sakuramachi.jpg",
+  "license": "Public domain",
+  "artist": "Kazahaya Shōshō",
+  "desc": "",
+  "w": 240,
+  "h": 256
+ },
+ "e117": {
+  "file": "Empress Go-Sakuramachi.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Empress_Go-Sakuramachi.jpg",
+  "license": "Public domain",
+  "artist": "Published by 三英舎 (San'ei-sha)",
+  "desc": "Empress Go-Sakuramachi, who was the 117th monarch of Japan",
+  "w": 240,
+  "h": 327
+ },
+ "e119": {
+  "file": "Emperor Kōkaku.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_K%C5%8Dkaku.jpg",
+  "license": "Public domain",
+  "artist": "Toyooka Harusuke",
+  "desc": "",
+  "w": 240,
+  "h": 208
+ },
+ "e121": {
+  "file": "孝明天皇宸影.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:%E5%AD%9D%E6%98%8E%E5%A4%A9%E7%9A%87%E5%AE%B8%E5%BD%B1.jpg",
+  "license": "Public domain",
+  "artist": "Koyama Shōtarō",
+  "desc": "孝明天皇宸影",
+  "w": 217,
+  "h": 360
  }
 }
