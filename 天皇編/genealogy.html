@@ -25,7 +25,7 @@
   <div class="hero">
     <p class="eyebrow">天皇編 系譜図</p>
     <h1>皇統の系譜図</h1>
-    <p class="lead">皇位は親から子へまっすぐ受け継がれただけではありません。皇統が分かれたり、遠い血筋から迎えられたりした4つの場面を系譜図で見たうえで、最後に歴代の全系譜をまとめます。</p>
+    <p class="lead">皇位は親から子へまっすぐ受け継がれただけではありません。皇統が分かれたり、遠い血筋から迎えられたりした4つの場面を系譜図で見ていきます。第1代からの全系譜は「歴代の全系譜」タブにまとめています。</p>
   </div>
 
   <details class="toc" open>
@@ -33,6 +33,12 @@
     <ol></ol>
   </details>
 
+  <div class="tabs" role="tablist">
+    <button type="button" role="tab" data-tab="scenes" aria-selected="true">場面で見る（①〜④）</button>
+    <button type="button" role="tab" data-tab="all" aria-selected="false">歴代の全系譜</button>
+  </div>
+
+  <div class="tab-panel" id="tab-scenes" role="tabpanel">
   <section>
     <h2 id="howto">図の見方</h2>
     <ul>
@@ -84,8 +90,11 @@
     <figure class="gfig" data-g="kaninn" data-title="④ 閑院宮家から光格天皇へ"></figure>
   </section>
 
+  </div>
+
+  <div class="tab-panel" id="tab-all" role="tabpanel" hidden>
   <section>
-    <h2 id="all">⑤ 歴代の全系譜</h2>
+    <h2 id="all">歴代の全系譜</h2>
     <p>第1代から第126代まで、北朝の5代も含めて、親子のつながりを時代ごとに示します。天皇どうしをつなぐために、即位しなかった皇族も点線の枠で入れています。</p>
     <ul>
       <li>女性天皇は父の下に置いています。母と子、夫婦の関係は線では示していません。</li>
@@ -96,6 +105,8 @@
     <figure class="gfig" id="tree-fig"></figure>
     <p class="wide-only"><button type="button" class="tool-btn" id="tree-all">全体図を開く（全時代を1枚で）</button></p>
   </section>
+
+  </div>
 
   <nav class="pager">
     <a class="prev" href="list.html"><small>前のページ</small>← 一覧と暗記</a>
@@ -405,6 +416,33 @@
     openZoom(draw("treeAll"), "歴代の全系譜（全体図）", 0.8);
   });
   showEra(1);
+
+  // ---- タブ（場面で見る／全系譜）。#all などのリンクで該当タブを開く ----
+  var tabs = document.querySelectorAll(".tabs [data-tab]");
+  function showTab(name) {
+    tabs.forEach(function (b) { b.setAttribute("aria-selected", b.dataset.tab === name ? "true" : "false"); });
+    document.querySelectorAll(".tab-panel").forEach(function (p) { p.hidden = p.id !== "tab-" + name; });
+    // 左の目次は、表示中のタブの見出しだけにする
+    document.querySelectorAll(".toc li").forEach(function (li) {
+      var t = document.getElementById(li.querySelector("a").getAttribute("href").slice(1));
+      li.hidden = !t || !!t.closest(".tab-panel[hidden]");
+    });
+  }
+  function tabFromHash() {
+    var t = location.hash && document.getElementById(location.hash.slice(1));
+    var panel = t && t.closest(".tab-panel");
+    showTab(panel ? panel.id.replace("tab-", "") : "scenes");
+    if (panel) t.scrollIntoView();
+  }
+  tabs.forEach(function (b) {
+    b.addEventListener("click", function () {
+      showTab(b.dataset.tab);
+      history.replaceState(null, "", b.dataset.tab === "all" ? "#all" : location.pathname);
+    });
+  });
+  // 目次は common.js が読み込み完了時に作るので、その後で反映する
+  document.addEventListener("DOMContentLoaded", tabFromHash);
+  window.addEventListener("hashchange", tabFromHash);
 
   function openZoom(r, title, scale0) {
     var scale = scale0 || 1.2, box = document.createElement("div");
