@@ -304,5 +304,77 @@
   "desc": "",
   "w": 240,
   "h": 244
+ },
+ "e88": {
+  "file": "Emperor Go-Saga.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Go-Saga.jpg",
+  "license": "Public domain",
+  "artist": "Fujiwara no Tamenobu",
+  "desc": "",
+  "w": 240,
+  "h": 255
+ },
+ "e90": {
+  "file": "Emperor Kameyama.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Kameyama.jpg",
+  "license": "Public domain",
+  "artist": "Fujiwara no Tamenobu",
+  "desc": "",
+  "w": 240,
+  "h": 259
+ },
+ "e96": {
+  "file": "Go-Daigo.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Go-Daigo.jpg",
+  "license": "Public domain",
+  "artist": "Monkan-bō Kōshin",
+  "desc": "",
+  "w": 155,
+  "h": 360
+ },
+ "e99": {
+  "file": "Emperor Go-Kameyama (cropped).jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Go-Kameyama_(cropped).jpg",
+  "license": "Public domain",
+  "artist": "Published by メディアックス(Mediax)",
+  "desc": "Portrait of the Emperor Go-Kameyama",
+  "w": 240,
+  "h": 217
+ },
+ "h1": {
+  "file": "光厳天皇像.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:%E5%85%89%E5%8E%B3%E5%A4%A9%E7%9A%87%E5%83%8F.jpg",
+  "license": "Public domain",
+  "artist": "不明。",
+  "desc": "深津は、応永14年以前に、空谷明応（仏日常光国師）によって描かれたものの写しであると推測している（深津,2014,p.239）。",
+  "w": 178,
+  "h": 360
+ },
+ "e100": {
+  "file": "Emperor Go-Komatsu.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Go-Komatsu.jpg",
+  "license": "Public domain",
+  "artist": "Unknown",
+  "desc": "",
+  "w": 240,
+  "h": 207
+ },
+ "e102": {
+  "file": "Emperor Go-Hanazono2.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Go-Hanazono2.jpg",
+  "license": "Public domain",
+  "artist": "Unknown",
+  "desc": "",
+  "w": 240,
+  "h": 319
+ },
+ "e103": {
+  "file": "Emperor Go-Tsuchimikado.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Go-Tsuchimikado.jpg",
+  "license": "Public domain",
+  "artist": "Tosa Mitsutake",
+  "desc": "",
+  "w": 240,
+  "h": 350
  }
 }
