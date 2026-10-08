@@ -379,6 +379,14 @@ a .gn:hover rect { fill: var(--paper-2); }
 .tl .ev { line-height: 1.75; }
 .tl .who { display: inline-block; margin-left: 6px; font-size: .82rem; white-space: nowrap; }
 .tl .note { margin: 8px 0 0; }
+/* 年表「詳しく見る」：在位年 */
+.tl > li.rd { padding-top: 6px; padding-bottom: 6px; font-size: .9rem; color: var(--ink-soft); }
+.tl > li.rd::before { top: 12px; background: var(--paper-3); border: 2px solid var(--shu); box-sizing: border-box; }
+.tl > li.rd .y { color: var(--ink-soft); }
+.tl .rn { display: none; font-size: .8rem; color: var(--ink-soft); }
+.detail-on .tl .rn { display: inline; }
+.den { display: inline-block; margin: 0 2px 0 4px; padding: 0 5px; font-family: var(--font-sans); font-size: .72rem; line-height: 1.5; color: var(--kin); border: 1px solid var(--kin); border-radius: 3px; white-space: nowrap; }
+.detail-hint { margin: -4px 0 12px; font-size: .85rem; color: var(--ink-soft); }
 
 @media (min-width: 1100px) {
   .site-header .wrap { max-width: 76rem; }

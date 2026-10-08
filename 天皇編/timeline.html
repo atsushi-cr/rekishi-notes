@@ -44,6 +44,10 @@
     <button type="button" data-k="g" aria-pressed="false" style="--c: var(--ai)">政治・制度</button>
     <button type="button" data-k="w" aria-pressed="false" style="--c: var(--ink-soft)">政変・戦乱</button>
   </div>
+  <div class="chips">
+    <button type="button" id="detail-btn" aria-pressed="false">＋ 詳しく見る（在位年）</button>
+  </div>
+  <p class="detail-hint" id="detail-hint" hidden>在位は「即位した年〜退位・崩御した年」。<span class="den">伝承</span>の印は『日本書紀』による伝承上の年で、実際の年代とは考えられていない。継体〜宣化の年は史料によって食い違いがある（諸説あり）。在位年はまだ一部の天皇だけ載せている。</p>
 
   <section style="--c: var(--era-1)">
     <div class="tl-head"><h2 id="era1">上古・古墳</h2><a href="era-1.html">第1〜28代 →</a></div>
@@ -174,25 +178,73 @@
   <div class="wrap">天皇編 ／ 出典・画像クレジットは<a href="sources.html">出典</a>のページにまとめています。</div>
 </footer>
 
+<script src="data/emperors.js"></script>
 <script>
-// 種類で絞り込む（該当なしの時代は見出しごと隠す）
+// 種類で絞り込む（該当なしの時代は見出しごと隠す）＋「詳しく見る」で在位年を表示
 (function () {
   var chips = document.getElementById("kind-chips");
-  chips.addEventListener("click", function (ev) {
-    var b = ev.target.closest("button");
-    if (!b) return;
-    var k = b.getAttribute("data-k");
-    chips.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
-    document.querySelectorAll(".tl").forEach(function (ol) {
+  var btn = document.getElementById("detail-btn");
+  var hint = document.getElementById("detail-hint");
+  var kind = "", detail = false;
+  function fmt(y) { return y < 0 ? "前" + (-y) : String(y); }
+  function yearOf(li) { var t = li.querySelector(".y").textContent; var n = parseInt(t.replace("前", "-"), 10); return n; }
+  function reign(e) { return "在位 " + fmt(e.r[0]) + "〜" + fmt(e.r[1]); }
+  function den(e) { return e.den ? '<span class="den">伝承</span>' : ""; }
+  var lists = document.querySelectorAll(".tl");
+  (window.EMPERORS || []).forEach(function (e) {
+    if (!e.r) return;
+    var id = (e.hokucho ? "h" : "e") + e.n;
+    var page = "era-" + e.era + ".html";
+    var label = (e.hokucho ? "北朝第" : "第") + e.n + "代 " + e.name;
+    var ol = lists[e.era - 1];
+    var dup = false;
+    document.querySelectorAll('.tl .who[href$="#' + id + '"]').forEach(function (a) {
+      var s = document.createElement("span");
+      s.className = "rn";
+      s.innerHTML = "（" + reign(e) + "）" + den(e);
+      a.after(s);
+      var li = a.closest("li");
+      if (li.getAttribute("data-k") === "s" && yearOf(li) === e.r[0]) dup = true;
+    });
+    if (dup || !ol) return;
+    var li = document.createElement("li");
+    li.className = "rd";
+    li.setAttribute("data-k", "s");
+    li.innerHTML = '<span class="y">' + fmt(e.r[0]) + '</span><div class="ev"><b>' + e.name + "が即位</b>（" + reign(e) + "）" + den(e) +
+      '<a class="who" href="' + page + "#" + id + '">' + label + "</a></div>";
+    var next = null;
+    ol.querySelectorAll(":scope > li").forEach(function (x) { if (!next && yearOf(x) > e.r[0]) next = x; });
+    ol.insertBefore(li, next);
+  });
+  function apply() {
+    document.body.classList.toggle("detail-on", detail);
+    btn.setAttribute("aria-pressed", detail ? "true" : "false");
+    btn.textContent = (detail ? "－ 詳しく見る" : "＋ 詳しく見る") + "（在位年）";
+    hint.hidden = !detail;
+    lists.forEach(function (ol) {
       var shown = 0;
-      ol.querySelectorAll("li").forEach(function (li) {
-        var on = !k || li.getAttribute("data-k") === k;
+      ol.querySelectorAll(":scope > li").forEach(function (li) {
+        var on = (!kind || li.getAttribute("data-k") === kind) && (detail || !li.classList.contains("rd"));
         li.hidden = !on;
         if (on) shown++;
       });
       ol.parentNode.hidden = shown === 0;
     });
+  }
+  chips.addEventListener("click", function (ev) {
+    var b = ev.target.closest("button");
+    if (!b) return;
+    kind = b.getAttribute("data-k");
+    chips.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    apply();
   });
+  btn.addEventListener("click", function () {
+    detail = !detail;
+    try { localStorage.setItem("tl-detail", detail ? "1" : ""); } catch (e) {}
+    apply();
+  });
+  try { detail = localStorage.getItem("tl-detail") === "1"; } catch (e) {}
+  apply();
 })();
 </script>
 </body>
