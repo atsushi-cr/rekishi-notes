@@ -47,7 +47,7 @@
   <div class="chips">
     <button type="button" id="detail-btn" aria-pressed="false">＋ 詳しく見る（在位年）</button>
   </div>
-  <p class="detail-hint" id="detail-hint" hidden>在位は「位を継いだ年（即位・践祚した年）〜退位・崩御した年」で、和暦の年に合わせている（年末の出来事は、西暦の暦に直すと翌年になることがある）。<span class="den">伝承</span>の印は『日本書紀』による伝承上の年で、実際の年代とは考えられていない。継体〜欽明の年は史料によって食い違いがあり、弘文天皇は即位したかどうかにも諸説がある。天智・持統天皇は即位前に、即位しないまま政治を執った（称制）期間がある。1183〜1185年は、平家とともに西国へ移った安徳天皇と、京都で位を継いだ後鳥羽天皇の在位が重なる。南北朝時代（1336〜1392年）は南朝と北朝の天皇が並び立ち、後小松天皇は1392年の南北朝合一までは北朝の天皇として在位した。在位年はまだ一部の天皇だけ載せている。</p>
+  <p class="detail-hint" id="detail-hint" hidden>在位は「位を継いだ年（即位・践祚した年）〜退位・崩御した年」で、和暦の年に合わせている（年末の出来事は、西暦の暦に直すと翌年になることがある）。<span class="den">伝承</span>の印は『日本書紀』による伝承上の年で、実際の年代とは考えられていない。継体〜欽明の年は史料によって食い違いがあり、弘文天皇は即位したかどうかにも諸説がある。天智・持統天皇は即位前に、即位しないまま政治を執った（称制）期間がある。1183〜1185年は、平家とともに西国へ移った安徳天皇と、京都で位を継いだ後鳥羽天皇の在位が重なる。南北朝時代（1336〜1392年）は南朝と北朝の天皇が並び立ち、後小松天皇は1392年の南北朝合一までは北朝の天皇として在位した。</p>
 
   <section style="--c: var(--era-1)">
     <div class="tl-head"><h2 id="era1">上古・古墳</h2><a href="era-1.html">第1〜28代 →</a></div>
@@ -188,14 +188,14 @@
   var kind = "", detail = false;
   function fmt(y) { return y < 0 ? "前" + (-y) : String(y); }
   function yearOf(li) { var t = li.querySelector(".y").textContent; var n = parseInt(t.replace("前", "-"), 10); return n; }
-  function reign(e) { return "在位 " + fmt(e.r[0]) + (e.r[1] === e.r[0] ? "" : "〜" + fmt(e.r[1])); }
+  function reign(e) { return "在位 " + fmt(e.r[0]) + (e.r[1] === e.r[0] ? "" : "〜" + (e.r[1] === null ? "" : fmt(e.r[1]))); }
   function den(e) { return e.den ? '<span class="den">伝承</span>' : ""; }
   var lists = document.querySelectorAll(".tl");
   (window.EMPERORS || []).forEach(function (e) {
     if (!e.r) return;
     var id = (e.hokucho ? "h" : "e") + e.n;
     var page = "era-" + e.era + ".html";
-    var label = (e.hokucho ? "北朝第" : "第") + e.n + "代 " + e.name;
+    var label = (e.hokucho ? "北朝第" : "第") + e.n + "代 " + (e.lbl || e.name);
     var ol = lists[e.era - 1];
     var dup = false;
     document.querySelectorAll('.tl .who[href$="#' + id + '"]').forEach(function (a) {
@@ -210,7 +210,7 @@
     var li = document.createElement("li");
     li.className = "rd";
     li.setAttribute("data-k", "s");
-    li.innerHTML = '<span class="y">' + fmt(e.r[0]) + '</span><div class="ev"><b>' + e.name + "が即位</b>（" + reign(e) + "）" + den(e) +
+    li.innerHTML = '<span class="y">' + fmt(e.r[0]) + '</span><div class="ev"><b>' + (e.lbl || e.name) + "が即位</b>（" + reign(e) + "）" + den(e) +
       '<a class="who" href="' + page + "#" + id + '">' + label + "</a></div>";
     var next = null;
     ol.querySelectorAll(":scope > li").forEach(function (x) { if (!next && yearOf(x) > e.r[0]) next = x; });
