@@ -387,6 +387,9 @@ a .gn:hover rect { fill: var(--paper-2); }
 .detail-on .tl .rn { display: inline; }
 .den { display: inline-block; margin: 0 2px 0 4px; padding: 0 5px; font-family: var(--font-sans); font-size: .72rem; line-height: 1.5; color: var(--kin); border: 1px solid var(--kin); border-radius: 3px; white-space: nowrap; }
 .detail-hint { margin: -4px 0 12px; font-size: .85rem; color: var(--ink-soft); }
+.detail-hint p { margin: 0 0 4px; }
+.detail-hint summary { cursor: pointer; color: var(--ai); width: fit-content; }
+.detail-hint ul { margin: 6px 0 0; padding-left: 1.3em; line-height: 1.7; }
 
 @media (min-width: 1100px) {
   .site-header .wrap { max-width: 76rem; }
