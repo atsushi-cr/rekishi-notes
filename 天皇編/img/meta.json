@@ -457,5 +457,50 @@
   "desc": "孝明天皇宸影",
   "w": 217,
   "h": 360
+ },
+ "e122": {
+  "file": "Emperor Meiji by Takahashi Yuichi.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Meiji_by_Takahashi_Yuichi.jpg",
+  "license": "Public domain",
+  "artist": "Takahashi Yuichi (1828-1894)",
+  "desc": "Emperor Meiji by Takahashi Yuichi, Imperial Collection",
+  "w": 240,
+  "h": 304
+ },
+ "e123": {
+  "file": "Emperor Taishō (cropped).jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Taish%C5%8D_(cropped).jpg",
+  "license": "Public domain",
+  "artist": "宮内省(Imperial Household Agency)",
+  "desc": "Cropped Portrait of Emperor Taisho",
+  "w": 235,
+  "h": 360
+ },
+ "e124": {
+  "file": "Emperor Showa.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Showa.jpg",
+  "license": "Public domain",
+  "artist": "宮内省(Imperial Household Agency)",
+  "desc": "Shōwa Emperor (Hirohito) at his enthronement in 1928.",
+  "w": 240,
+  "h": 312
+ },
+ "e125": {
+  "file": "Emperor Akihito (2016).jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Akihito_(2016).jpg",
+  "license": "Public domain",
+  "artist": "Malacañang Photo Bureau",
+  "desc": "President Benigno S. Aquino III, accompanied by His Majesty Emperor Akihito and Her Majesty Empress Michiko of Japan during their arrival at the Malacañan Palac",
+  "w": 240,
+  "h": 294
+ },
+ "e126": {
+  "file": "Emperor Naruhito at TICAD7 (cropped).jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Emperor_Naruhito_at_TICAD7_(cropped).jpg",
+  "license": "CC0",
+  "artist": "TICAD7 Photographs",
+  "desc": "The emperor of Japan Naruhito, in 2019.",
+  "w": 240,
+  "h": 325
  }
 }
