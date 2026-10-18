@@ -213,6 +213,9 @@ figcaption { font-size: .8rem; color: var(--ink-soft); margin-top: .4em; line-he
 table { border-collapse: collapse; width: 100%; font-size: .9rem; }
 th, td { border-bottom: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
 th { font-family: var(--font-serif); background: var(--paper-2); }
+/* 列の多い表：狭い画面では折り返さず横スクロール。最初の3列（代・名前・年など）は改行しない */
+table.wide-table { min-width: 600px; }
+table.wide-table td:nth-child(-n+3) { white-space: nowrap; }
 
 /* 編の一覧カード（トップページ） */
 .volumes { display: grid; gap: 14px; margin: 24px 0; }
